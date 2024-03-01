@@ -9,6 +9,11 @@ router.route("/")
     router.route("/sign")
     .get((req, res) => {
         res.render("sign", {}); 
-    });   
+    });
+    
+    router.route("/main")
+    .get((req,res)=>{
+        res.render("main",{});
+    })
 
 module.exports = router;
