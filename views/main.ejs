@@ -2,23 +2,27 @@
 
 
   <!--오른쪽 사이드바-->
-  <div class="sidebar2">
-    <div class = "sideprofile">
-    <img src="#" alt="프로필 이미지"><span class="username">user1</span>
-    </div></div>
+      <div class="sidebar2">
+        <div class="sideprofile">
+          
+            <img src="#" alt="프로필 이미지"><span class="username"><%= userId %></span> 
+            
+        </div>
+      </div>
+      
    
 
   <!-- 메인 콘텐츠 부분 -->
   <div class="main-content">
     <!-- 스토리 컨테이너 -->
     <div class="story-container">
-      <div class="story"><img src="story1.jpg" ><span class="username">user1</span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username">user2</span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username">user3</span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username">user4</span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username">user5</span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username">user6</span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username">user6</span></div>
+      <div class="story"><img src="story1.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
     </div>
     
 
@@ -29,7 +33,7 @@
       
          
       <div class="post">
-        <p>프로필 이미지 / username </p>
+        <p>프로필 이미지 / <%= userId %> </p>
         <img src="post2.jpg" alt="Post 2"><br>
         <!--하트는 클릭하면 변하게 나중에 수정필요-->
         <img src="/images/heart.png" style="width:25px; height: 25px;">
@@ -40,7 +44,7 @@
       </div><hr>
 
        <div class="post">
-        <p>프로필 이미지 / username </p>
+        <p>프로필 이미지 / <%= userId %> </p>
         <img src="post2.jpg" alt="Post 2"><br>
         <img src="/images/heart.png" style="width:25px; height: 25px;">
         <img src="/images/comment.png" style="width:25px; height: 25px;">

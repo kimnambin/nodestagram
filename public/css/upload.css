@@ -1,0 +1,55 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* card 요소를 중앙에 배치 */
+  .card {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column; 
+    border: solid 0.1rem #dbdbdb;
+    border-radius: 0.1rem;
+    height: 650px;
+    width: 500px; 
+  }
+
+  .card-body{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .btn{
+    align-items: center;
+    background-color: rgba(0, 149, 246, 0.6999999881);
+    border-radius: 0.8rem;
+    color: #ffffff;
+    display: flex;
+    flex-shrink: 0;
+    font-family: Roboto, 'Source Sans Pro';
+  }
+
+  .card2 {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column; 
+    border: solid 0.1rem #dbdbdb;
+    border-radius: 0.1rem;
+    height: 650px;
+    width: 500px; 
+  }
+
+  .input[type="text"]::placeholder {
+    position: absolute;
+    top: 0%;
+    left: 10px; /* 입력 필드에서의 왼쪽 여백 조정 */
+    transform: translateY(-50%);
+    color: #999; /* 플레이스홀더의 색상 설정 */
+  }

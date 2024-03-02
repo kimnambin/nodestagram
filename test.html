@@ -7,49 +7,74 @@
 <body>
   
   <div class="card">
-  <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <h5 class="card-title" style="font-weight: bold;">새 게시물 만들기</h5>
-    <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 10px 0;">
-    <h6 class="card-subtitle mb-2 text-muted">
-      <img src="public/images/upload.png" style="width: 180px; height: 180px;">
-    </h6>
-    <p>사진을 여기에 끌어다 놓으세요</p>
-    <button class="btn" onclick="openPopup('popup02.html')">컴퓨터에서 선택</button>
-  </div>
+    <div class="card-body" >
+        <h5 class="card-title" style="font-weight: bold;">새 게시물 만들기</h5>
+        <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 10px 0;">
+        <h6 class="card-subtitle mb-2 text-muted">
+            <img src="/images/upload.png" style="width: 180px; height: 180px; margin-top:60px;">
+        </h6>
+        <p id="dropArea" style="margin-top:60px;">사진을 여기에 끌어다 놓으세요</p>
+        <input type="file" id="fileInput" style="display: none;" accept="image/*">
+        <label for="fileInput" id="uploadLabel" class="btn">컴퓨터에서 선택</label>
+    </div>
 </div>
 
+<script>
+    const dropArea = document.getElementById('dropArea');
+
+    // 드래그 앤 드롭 이벤트 처리
+    dropArea.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        dropArea.classList.add('active');
+    });
+
+    dropArea.addEventListener('dragleave', function (e) {
+        e.preventDefault();
+        dropArea.classList.remove('active');
+    });
+
+    dropArea.addEventListener('drop', function (e) {
+        e.preventDefault();
+        dropArea.classList.remove('active');
+
+        const file = e.dataTransfer.files[0];
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                img.style.maxWidth = '180px';
+                img.style.height = 'auto';
+                dropArea.innerHTML = ''; // 기존에 업로드된 이미지 제거
+                dropArea.appendChild(img); // 이미지 삽입
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('이미지 파일을 업로드해주세요.');
+        }
+    });
+
+    // 파일 선택 버튼 클릭 시 input 요소 열기
+    document.getElementById('uploadLabel').addEventListener('click', function (e) {
+        document.getElementById('fileInput').click();
+    });
+
+    // 파일 선택 시 이미지 미리보기
+    document.getElementById('fileInput').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                img.style.maxWidth = '180px';
+                img.style.height = 'auto';
+                dropArea.innerHTML = ''; // 기존에 업로드된 이미지 제거
+                dropArea.appendChild(img); // 이미지 삽입
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 </body>
-<style>
-  body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* card 요소를 중앙에 배치 */
-  .card {
-    align-items: center;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column; 
-    border: solid 0.1rem #dbdbdb;
-    border-radius: 0.1rem;
-    height: 650px;
-    width: 500px; 
-    
-  }
-
-  .btn{
-    align-items: center;
-            background-color: rgba(0, 149, 246, 0.6999999881);
-            border-radius: 0.8rem;
-            color: #ffffff;
-            display: flex;
-            flex-shrink: 0;
-            font-family: Roboto, 'Source Sans Pro';
-  }
-
-</style>
 </html>
