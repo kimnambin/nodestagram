@@ -5,7 +5,7 @@
       <div class="sidebar2">
         <div class="sideprofile">
           
-            <img src="#" alt="프로필 이미지"><span class="username"><%= userId %></span> 
+            <img src="/images/profile.jpg"style="height: 40px; width: 40px; margin-right:10px;"><span class="username"><%= userId %></span> 
             
         </div>
       </div>
@@ -16,7 +16,15 @@
   <div class="main-content">
     <!-- 스토리 컨테이너 -->
     <div class="story-container">
-      <div class="story"><img src="story1.jpg" ><span class="username"><%= userId %></span></div>
+      <% posts.forEach(post => { %>
+          <div class="story">
+              <% if (post.img) { %>
+                  <img src="<%= post.img %>">
+              <% } %>
+              <span class="username"><%= userId %></span>
+          </div>
+      <% }); %>
+  </div>
       <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
       <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
       <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
@@ -33,7 +41,7 @@
       
          
       <div class="post">
-        <p>프로필 이미지 / <%= userId %> </p>
+        <p><img src="/images/profile.jpg"style="height: 40px; width: 40px; margin-right:10px;"> <%= userId %> </p>
         <img src="post2.jpg" alt="Post 2"><br>
         <!--하트는 클릭하면 변하게 나중에 수정필요-->
         <img src="/images/heart.png" style="width:25px; height: 25px;">

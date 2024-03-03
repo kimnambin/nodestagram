@@ -5,9 +5,9 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imageUrl: {
-        data:Buffer,
-        contentType:String,
+    img:{
+        data: Buffer,
+        contentType: String
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -21,3 +21,4 @@ const postSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Post", postSchema);
+

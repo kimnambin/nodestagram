@@ -41,11 +41,14 @@ const loginUser = asyncHandler(async (req, res) => {
     // 토큰 생성 및 쿠키에 저장
     const token = jwt.sign({ id: user._id }, jwtSecret);
     res.cookie("token", token, { httpOnly: true });
+
+    // const userPosts = await Post.find({ userId: user._id });
     
      // 로그인 후 사용자 아이디를 표시
      res.render("main", { 
         userId: user.id, 
-        userProfileImageSrc: "#", 
+        userProfileImageSrc: "#"
+        //userPosts: userPosts
     });
 });
 
@@ -76,5 +79,23 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
+//로그인 체크 -> 관리자인지 아닌 지 확인하기
+const checkLogin = (req, res, next) => {
+    const token = req.cookies.token;
+  
+    // 토큰이 없으면 로그인 페이지로 이동
+    if (!token) {
+      res.redirect("/login");
+    } else {
+      // 토큰이 있다면 토큰을 확인하고 사용자 정보를 요청에 추가
+      try {
+        const decoded = jwt.verify(token, jwtSecret); // 토큰 해석하기
+        req.user = { _id: decoded.id }; 
+        next();
+      } catch (error) {
+        res.redirect("/main");
+      }
+    }
+  };
 
-module.exports = {getLogin , loginUser , getRegister , registerUser}
+module.exports = {getLogin , loginUser , getRegister , registerUser , checkLogin}
