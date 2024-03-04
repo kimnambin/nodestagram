@@ -18,6 +18,7 @@ const getLogin = (req,res) => {
 const loginUser = asyncHandler(async (req, res) => {
     const { id, pw } = req.body;
 
+
     // 입력된 값이 전화번호인지, 사용자명인지, 이메일인지 확인
     const user = await User.findOne({
         $or: [
@@ -42,13 +43,12 @@ const loginUser = asyncHandler(async (req, res) => {
     const token = jwt.sign({ id: user._id }, jwtSecret);
     res.cookie("token", token, { httpOnly: true });
 
-    // const userPosts = await Post.find({ userId: user._id });
+    
     
      // 로그인 후 사용자 아이디를 표시
      res.render("main", { 
         userId: user.id, 
         userProfileImageSrc: "#"
-        //userPosts: userPosts
     });
 });
 

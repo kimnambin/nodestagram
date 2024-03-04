@@ -25,7 +25,7 @@ function uploadImage(input) {
             btn.addEventListener("click", function() {
                 // 사용자가 입력한 데이터 수집
                 const body = document.getElementById("body").value;
-                
+                window.location.href = '/main';
                 // FormData 객체 생성
                 const formData = new FormData();
                 formData.append('body', body);
