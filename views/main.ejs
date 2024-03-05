@@ -18,12 +18,12 @@
     <div class="story-container">
     
   </div>
-      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="story2.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="/images/profile.jpg"> <span class="username"><%= userId %></span></div>
+      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
+      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
     </div>
     
 
@@ -32,28 +32,23 @@
     <!-- Feed -->
     <div class="feed">
       
-         
+    
+      <% files.forEach(file => { %>
       <div class="post">
         <p><img src="/images/profile.jpg"style="height: 40px; width: 40px; margin-right:10px;"> <%= userId %> </p>
-        <img src="post2.jpg" alt="Post 2"><br>
+       
+        <img src="/uploads/<%= file %>" style="height: 640px; width: 460px; margin-right:10px;"><br>
+        
         <!--하트는 클릭하면 변하게 나중에 수정필요-->
         <img src="/images/heart.png" style="width:25px; height: 25px;">
         <img src="/images/comment.png" style="width:25px; height: 25px;">
         <img src="/images/share.png" style="width:25px; height: 25px;"> <br>
         좋아요 갯수
-        <p class="postcontent">내용   더보기...</p>
+        <p class="postcontent"><%= body %>gkgkgkgk</p>
       </div><hr>
-
-       <div class="post">
-        <p>프로필 이미지 / <%= userId %> </p>
-        <img src="post2.jpg" alt="Post 2"><br>
-        <img src="/images/heart.png" style="width:25px; height: 25px;">
-        <img src="/images/comment.png" style="width:25px; height: 25px;">
-        <img src="/images/share.png" style="width:25px; height: 25px;"> <br>
-        좋아요 갯수
-        <p class="postcontent">내용   더보기...</p>
-      </div><hr>
-
+      <% }) %>
+       
+   
     </div>   
   </div>
 

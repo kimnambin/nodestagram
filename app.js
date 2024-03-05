@@ -7,6 +7,7 @@ const db = require("./config/db");
 //로그인한 정보 확인하기 (메인에서 아이디 표시를 위함)
 const cookieParser = require('cookie-parser');
 const mongoose = require("mongoose"); // mongoose 추가
+const path = require('path');
 
 //ejs 사용
 app.set("view engine", "ejs");
@@ -15,6 +16,8 @@ app.set("views", "./views");
 db();
 
 app.use(express.static("./public"));
+//app.use(express.static('uploads')); //업로드 된 이미지 폴더
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
