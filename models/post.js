@@ -5,15 +5,18 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    img:{
+    img: {
         data: Buffer,
         contentType: String
     },
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    userId: {
+        type: String,
+        required: true 
     }
 });
 
 module.exports = mongoose.model("Post", postSchema);
-

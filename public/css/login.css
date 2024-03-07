@@ -163,7 +163,7 @@
   
   
   .div_bottom {
-      align-items: center;
+    align-items: center;
     background-color: #ffffff;
     border: solid 0.1rem #dbdbdb;
     border-radius: 0.1rem;
@@ -207,3 +207,11 @@
           white-space: nowrap;
         }
   
+        .alert-danger{
+          align-items: center;
+          color: red;
+          display: flex;
+          font-size: 1.4rem;
+          justify-content: center; 
+          font-weight: bold; 
+        }

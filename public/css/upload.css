@@ -46,10 +46,12 @@ body, html {
     width: 500px; 
   }
 
+
   .input[type="text"]::placeholder {
     position: absolute;
     top: 0%;
-    left: 10px; /* 입력 필드에서의 왼쪽 여백 조정 */
+    left: 10px; 
     transform: translateY(-50%);
-    color: #999; /* 플레이스홀더의 색상 설정 */
+    color: #999; 
+    resize: none;
   }

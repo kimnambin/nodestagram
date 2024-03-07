@@ -21,7 +21,13 @@
               <input type="text" id="pw" name="pw" placeholder="Password" class="pw_input">
               <button type="submit" class="loginbutton">Log in</button>
             
-            
+              
+              <% if (typeof showToast !== 'undefined' && showToast) { %>
+                <div class="alert alert-danger" role="alert">
+                  <%= showToast %>
+                </div>
+              <% } %>
+
             <div class="div_or">
               <div class="left_or"></div> 
               <div class="or">or</div>

@@ -19,6 +19,7 @@
     padding: 20px;
     border-right: 2px solid #ccc;
     float: left;
+    position: fixed; /*고정하기 */
   }
   
   .sidebar1 h1 {
@@ -26,8 +27,10 @@
   }
   
   .nav-links {
-    list-style-type: none;
-    padding: 0;
+    list-style: none; /* 리스트 마커 제거 */
+    padding: 0; /* 내부 여백 제거 */
+    margin: 0; /* 외부 여백 제거 */
+    
     
   }
   
@@ -62,8 +65,8 @@
   }
   
   .story img {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
   }
   
@@ -112,6 +115,7 @@
     align-self: center; 
   }
   
+  
   /* 미디어 쿼리(Media Queries) */
   @media screen and (max-width: 768px) {
     .sidebar1, .sidebar2 {
@@ -119,8 +123,16 @@
       float: none; 
     }
     @media screen and (max-width: 768px) {
-    .story:nth-child(n+4) {
+    .story:nth-child(n+3),.sideprofile img,
+    .sideprofile .username {
       display: none; 
+    }
+  }
+  
+  @media screen and (max-width: 576px) { /* 화면의 너비가 768px 이하인 경우에만 적용됨 */
+    .story-container {
+      padding: 5px; /* padding을 작게 조정 */
+      margin-right: 5px; /* margin을 작게 조정 */
     }
   }
   

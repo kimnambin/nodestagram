@@ -6,7 +6,7 @@
         <div class="sideprofile">
           
             <img src="/images/profile.jpg"style="height: 40px; width: 40px; margin-right:10px;"><span class="username"><%= userId %></span> 
-            
+            <a href="/" style="margin-left: 10px; font-size: 0.8rem; text-decoration: none; font-weight: bold;">로그아웃</a>
         </div>
       </div>
       
@@ -36,20 +36,22 @@
       
     
       
-     
-      <div class="post">
-        <p><img src="/images/profile.jpg"style="height: 25px; width: 25px; margin-right:10px;"> <%= userId %> </p>
+      <% posts.forEach((post, index)=> { %>
+        <div class="post">
+            <p><img src="/images/profile.jpg" style="height: 25px; width: 25px; margin-right:10px;"><%= post.userId %> </p>
+            <% if (files[index]) { %>
+              <img src="/uploads/<%= files[index] %>" style="height: 640px; width: 460px; margin-right:10px;"><br>
+          <% } %>
+            <!--하트는 클릭하면 변하게 나중에 수정필요-->
+            <img src="/images/heart.png" style="width:25px; height: 25px;">
+            <img src="/images/comment.png" style="width:25px; height: 25px;">
+            <img src="/images/share.png" style="width:25px; height: 25px;"> <br>
+            <p style="font-size: 12px;">좋아요 갯수</p>
+            <p class="postcontent"><span style="font-weight: bold;"><%= post.userId %></span> <%= post.body %></p>
+        </div><hr>
+    <% }) %>
+    
        
-        <img src="" style="height: 640px; width: 460px; margin-right:10px;"><br>
-        
-        <!--하트는 클릭하면 변하게 나중에 수정필요-->
-        <img src="/images/heart.png" style="width:25px; height: 25px;">
-        <img src="/images/comment.png" style="width:25px; height: 25px;">
-        <img src="/images/share.png" style="width:25px; height: 25px;"> <br>
-        좋아요 갯수
-        <p class="postcontent"></p>
-      </div><hr>
-      
    
     </div>   
   </div>

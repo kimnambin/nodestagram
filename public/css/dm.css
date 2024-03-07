@@ -1,0 +1,67 @@
+/*디엠 페이지 부분 */
+.dmsidebar{
+    width: 250px;
+    min-height: 100vh;
+    padding: 20px;
+    border-right: 2px solid #ccc; 
+    float: left;
+    margin-left: 250px;
+  }
+
+  .top-dm {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .top-dm img {
+    margin-right: 10px;
+  }
+  
+  .top-dm p {
+    margin: 0;
+  }
+
+
+ 
+  .dm-bottom {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    
+    .dm_input {
+      background-color: #fafafa;
+      border: solid 0.1rem #dbdbdb;
+      border-radius: 1.2rem;
+      height: 3.8rem;
+      margin-bottom: auto;
+      width: 60%; 
+      position: relative;
+      display: flex;
+      margin-left: auto;
+  }
+  
+
+.dm-buttom{
+  
+  align-items: center;
+  background-color:rgb(239, 239, 239);
+  border-radius: 0.8rem;
+  display: flex;
+  flex-shrink: 0;
+  font-family: Roboto, 'Source Sans Pro';
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: 120px; 
+  height: 40px;
+  justify-content: center;
+  line-height: 1.2857142857;
+  margin-top: 1rem;
+  white-space: nowrap;
+  box-sizing: border-box;
+}

@@ -10,12 +10,12 @@
   
   <div class="card">
     <div class="card-body" >
-      <h5 class="card-title" style="font-weight: bold;">새 게시물 만들기<%= userId %></h5>
+      <h5 class="card-title" style="font-weight: bold;">'<%= userId %>'님의 게시물 만들기</h5>
       <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 10px 0;">
       <h6 class="card-subtitle mb-2 text-muted">
         <img src="/images/upload.png" style="width: 180px; height: 180px; margin-top:60px;">
       </h6>
-      <form method="POST" action="/main" enctype="multipart/form-data" style="display: flex; flex-direction: column; align-items: center;"></form>
+      <form method="POST" action="/mainupload" enctype="multipart/form-data" style="display: flex; flex-direction: column; align-items: center;"></form>
       <input type="file" id="fileInput" name="img" style="display: none;" accept="image/*" onchange="uploadImage(this)">
       <label for="fileInput" id="uploadLabel" class="btn">컴퓨터에서 선택</label>
     </div>
@@ -24,7 +24,7 @@
 
 <div class="card2" id="card2" style="display: none;">
   <div class="card-body">
-      <h5 class="card-title" style="font-weight: bold;">새 게시물 만들기<%= userId %></h5>
+      <h5 class="card-title" style="font-weight: bold;">'<%= userId %>'님 게시물 만들기</h5>
       <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 10px 0;">
       <h6 class="card-subtitle mb-2 text-muted" id="previewImage"></h6>
       

@@ -6,7 +6,7 @@ function uploadImage(input) {
             const img = document.createElement("img");
             img.src = e.target.result;
             img.style.maxWidth = "180px";
-            img.style.height = "auto";
+            img.style.height = "180px";
 
             const preview = document.getElementById("previewImage");
             preview.innerHTML = ""; // 기존에 업로드된 이미지 제거
@@ -25,14 +25,14 @@ function uploadImage(input) {
             btn.addEventListener("click", function() {
                 // 사용자가 입력한 데이터 수집
                 const body = document.getElementById("body").value;
-                window.location.href = '/main';
+                window.location.href = '/mainupload';
                 // FormData 객체 생성
                 const formData = new FormData();
                 formData.append('body', body);
                 formData.append('img', file); // 이미지 파일 직접 추가
                 
                 // POST 요청 보내기
-                fetch("/main", {
+                fetch("/mainupload", {
                     method: "POST",
                     body: formData, // FormData 객체 전송
                 })

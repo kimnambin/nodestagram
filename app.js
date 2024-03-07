@@ -16,7 +16,6 @@ app.set("views", "./views");
 db();
 
 app.use(express.static("./public"));
-//app.use(express.static('uploads')); //업로드 된 이미지 폴더
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +25,8 @@ app.use(cookieParser());
 
 //라우터 부분
 app.use("/", require("./routes/login_sign"));
-app.use("/", require("./routes/main"));
+app.use("/", require("./routes/mainupload"));
+app.use("/", require("./routes/dm"));
 
 // 서버 실행
 app.listen(3000, () => {

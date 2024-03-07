@@ -28,15 +28,17 @@ const loginUser = asyncHandler(async (req, res) => {
         ]
     });
 
-    // 사용자가 존재하는지 확인
-    if (!user) {
-        return res.json({ message: '사용자를 찾을 수 없습니다.' });
+     // 사용자가 존재하는지 확인
+     if (!user) {
+        // 사용자를 찾을 수 없는 경우
+        return res.render("login", { showToast: '로그인을 하세요.' });
     }
 
     // 비밀번호가 일치하는지 확인
     const isMatch = await bcrypt.compare(pw, user.pw);
     if (!isMatch) {
-        return res.json({ message: '비밀번호가 일치하지 않습니다.' });
+        // 비밀번호가 일치하지 않는 경우
+        return res.render("login", { showToast: '비밀번호가 일치하지 않습니다.' });
     }
 
     // 토큰 생성 및 쿠키에 저장
@@ -45,10 +47,11 @@ const loginUser = asyncHandler(async (req, res) => {
 
     
     
-     // 로그인 후 사용자 아이디를 표시
+     //로그인 후 사용자 아이디를 표시
      res.render("main", { 
         userId: user.id, 
     });
+    
 });
 
 
@@ -90,12 +93,14 @@ const checkLogin = (req, res, next) => {
       try {
         const decoded = jwt.verify(token, jwtSecret); 
         req.user = { id: decoded.id }; 
-        console.log("Logged in user:", req.user);
         next();
       } catch (error) {
+      
+        
         res.redirect("/main");
       }
     }
   };
+
 
 module.exports = {getLogin , loginUser , getRegister , registerUser , checkLogin}
