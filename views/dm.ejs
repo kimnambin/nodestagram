@@ -2,7 +2,7 @@
 
 <nav class="navbar">
     <div class="dmsidebar">
-      <h1 style="margin-bottom: 45px;">여기에 닉네임</h1>
+      <h1 style="margin-bottom: 45px;"><img src="/images/profile.jpg" style="height: 50px; width: 50px; margin-left:10px;"><%= userId %></h1>
       
       <ul class="nav-links">
         <li><a href="/mainupload" style="text-decoration: none; color: black;">이미지랑 닉네임</a></li><br>
@@ -20,20 +20,23 @@
 
   <div class="content">
     <div class="dm">
-      <div class="top-dm">
-        <p><img src="/images/profile.jpg" style="height: 50px; width: 50px; margin-left:10px;"> 여기에 닉네임 </p>
-        <img src="/images/dmpage.png" style="height: 65px; width: 140px; margin-left: auto;">
-      </div>
-      <hr> 
-      <div class="dm-bottom">
-        <img src="/images/profile.jpg" style="height: 100px; width: 100px; justify-content: center; "><br>
-        여기에 닉네임 <br>
-        <button type="button" class="dm-buttom">프로필 보기</button>
+        <div class="top-dm">
+            <p><img src="/images/profile.jpg" style="height: 50px; width: 50px; margin-left:10px;"><%= userId %></p>
+            <img src="/images/dmpage.png" style="height: 65px; width: 140px; margin-left: auto;">
+        </div>
+        <hr>
+        <div class="dm-bottom">
+            <img src="/images/profile.jpg" style="height: 100px; width: 100px; justify-content: center; "><br>
+            상대방 <br>
+            <button type="button" class="dm-buttom">프로필 보기</button>
+        </div>
     </div>
-        <form class="login" action="/" method="POST">
-          <input type="text" id="dm" name="dm" placeholder="메시지 입력...." class="dm_input">
-        </form>
-    </div>
+</div>
+
+<!--소켓 io 적용하기!! -->
+    <form action="/" method="POST">
+        <input type="text" id="dm" name="dm" placeholder="메시지 입력...." class="dm_input">
+    </form>
 </div>
 
 </body>

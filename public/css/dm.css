@@ -1,12 +1,26 @@
 /*디엠 페이지 부분 */
-.dmsidebar{
-    width: 250px;
-    min-height: 100vh;
-    padding: 20px;
-    border-right: 2px solid #ccc; 
-    float: left;
-    margin-left: 250px;
-  }
+.dmsidebar {
+  width: 250px;
+  min-height: 100vh;
+  padding: 20px;
+  border-right: 2px solid #ccc; 
+  position: fixed; /* 사이드바를 화면에 고정 */
+  left: 0; /* 화면 왼쪽에 배치 */
+  top: 0; /* 화면 상단에 배치 */
+  margin-left: 250px;
+}
+
+.dm {
+  margin-left: 520px; /* 사이드바 너비만큼 오른쪽으로 이동 */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 20px; 
+}
+
+.dm form {
+  margin-top: auto;
+}
 
   .top-dm {
     display: flex;
@@ -39,12 +53,12 @@
       border: solid 0.1rem #dbdbdb;
       border-radius: 1.2rem;
       height: 3.8rem;
-      margin-bottom: auto;
-      width: 60%; 
-      position: relative;
-      display: flex;
-      margin-left: auto;
-  }
+      max-width: calc(100% - 770px);
+      min-width: 920px;
+      margin-left: 540px;
+      margin-right: 20px; /* 우측 여백 추가 */
+    }
+    
   
 
 .dm-buttom{
