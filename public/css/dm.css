@@ -1,6 +1,6 @@
 /*디엠 페이지 부분 */
 .dmsidebar {
-  width: 250px;
+  width: 230px;
   min-height: 100vh;
   padding: 20px;
   border-right: 2px solid #ccc; 
@@ -12,59 +12,43 @@
 
 .dm {
   margin-left: 520px; /* 사이드바 너비만큼 오른쪽으로 이동 */
+  min-width: 700px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding-top: 20px; 
+  position: fixed; /* 수정: 컨텐츠를 화면에 고정 */
+  top: 0; 
 }
 
-.dm form {
-  margin-top: auto;
-}
 
-  .top-dm {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .top-dm img {
-    margin-right: 10px;
-  }
-  
-  .top-dm p {
-    margin: 0;
-  }
-
-
- 
-  .dm-bottom {
-      margin-top: 25px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-    }
-    
-    .dm_input {
-      background-color: #fafafa;
-      border: solid 0.1rem #dbdbdb;
-      border-radius: 1.2rem;
-      height: 3.8rem;
-      max-width: calc(100% - 770px);
-      min-width: 920px;
-      margin-left: 540px;
-      margin-right: 20px; /* 우측 여백 추가 */
-    }
-    
-  
-
-.dm-buttom{
-  
+.top-dm {
+  display: flex;
   align-items: center;
-  background-color:rgb(239, 239, 239);
+  position: relative;
+}
+
+.top-dm img {
+  margin-right: 10px;
+}
+
+.top-dm p {
+  margin: 0;
+}
+
+.dm-bottom {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.dm-buttom {
+  align-items: center;
+  background-color: rgb(239, 239, 239);
   border-radius: 0.8rem;
   display: flex;
   flex-shrink: 0;
@@ -78,4 +62,31 @@
   margin-top: 1rem;
   white-space: nowrap;
   box-sizing: border-box;
+}
+
+
+.dm_input {
+  background-color: #fafafa;
+  border: solid 0.1rem #dbdbdb;
+  border-radius: 1.2rem;
+  height: 3.8rem;
+  max-width: calc(100% - 770px);
+  min-width: 680px;
+  margin-left: 520px;
+  margin-right: 20px; 
+  margin-top: auto;
+  position: fixed; /* 페이지 하단에 고정 */
+  bottom: 0; 
+}
+
+
+@media screen and (max-width: 768px) {
+  .dmsidebar{
+    display: none; 
+  }
+  .dm {
+    margin-left: auto; /* 가운데 정렬 */
+    margin-right: auto; /* 가운데 정렬 */
+    width: 80%; /* 예시로 80%의 너비를 가지도록 설정, 필요에 따라 조절 가능 */
+  }
 }

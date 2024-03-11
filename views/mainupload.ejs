@@ -14,27 +14,24 @@
 
   <!-- 메인 콘텐츠 부분 -->
   <div class="main-content">
+
+    
+
     <!-- 스토리 컨테이너 -->
-    <div class="story-container">
-    
+  <div class="story-container">
+      <% storyposts.forEach((storypost)=> { %>
+      <div class="story">
+        <img src="/images/profile.jpg">
+        <span class="username"><%= storypost.userId %></span>
+      </div>
+      <% }) %>
   </div>
-      <div class="story"><img src="/images/profile.jpg"> <span class="username"><%= userId %></span></div>
-      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
-      <div class="story"><img src="/images/profile.jpg" ><span class="username"><%= userId %></span></div>
-    </div>
-    
+
 
 
 
     <!-- Feed -->
     <div class="feed">
-      
-    
       
       <% posts.forEach((post, index)=> { %>
         <div class="post">

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+</head>
+<body>
+  
+  <div class="card">
+    <div class="card-body">
+        <% storyposts.forEach((storypost)=> { %>
+            <h5 class="card-title" style="display: flex; align-items: center; margin-right: auto;">
+                <img src="/images/profile.jpg" style="height: 25px; width: 25px; margin-right:10px;">
+                <p style="margin: 0;"><%= storypost.userId %></p>
+                <a href="/mainupload" style="text-decoration: none; color: black; font-size: 30px;  margin-left: 320px;"> x </a>
+            </h5>
+            <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 5px 0;">
+      
+    
+      <h6 class="card-subtitle mb-2 text-muted">
+                <% if (files) { %>
+                  <img src="/storys/<%= files %>" style="height: 460px; width: 380px; margin-right:10px;"><br>
+              <% } %>
+                <!--하트는 클릭하면 변하게 나중에 수정필요-->
+                <img src="/images/heart.png" style="width:25px; height: 25px;">
+            </div><hr>
+        <% }) %>
+       
+      </h6>
+    </div>
+  
+    <style>
+        body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* card 요소를 중앙에 배치 */
+  .card {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column; 
+    border: solid 0.1rem #dbdbdb;
+    border-radius: 0.1rem;
+    height: 650px;
+    width: 500px; 
+  }
+
+  .card-body{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+    </style>
+    
+</body>
+</html>

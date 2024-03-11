@@ -3,7 +3,8 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
-const User = require("../models/user"); 
+const User = require("../models/user");
+const Storypost = require("../models/storypost");
 const asyncHandler = require("express-async-handler");
 const multer = require("multer");
 const { checkLogin } = require("../controllers/user");
@@ -50,18 +51,19 @@ router.route("/mainupload")
     .get(checkLogin, asyncHandler(async (req, res) => {
         const userId = req.user.id; // 사용자 아이디
         
-
         const user = await User.findOne({id: userId}); 
         
-        // 모든 포스트 가져오기
+        // 모든 포스트 가져오기f
         const posts = await Post.find().sort({ createdAt: -1 });
+        // 모든 스토리 가져오기
+        const storyposts = await Storypost.find().sort({ createdAt: -1 });
     
         // 포스트가 없는 경우 처리
         const body = posts.length > 0 ? posts[0].body : '';
         const sortedFiles = getSortedFiles();
         console.log("user 모델 전달확인:", req.user);
         console.log("post 모델 전달확인:", req.post);
-        res.render("mainupload", { user: user, userId: userId, files: sortedFiles, body: body ,posts: posts });
+        res.render("mainupload", { user: user, userId: userId, files: sortedFiles, body: body ,posts: posts, storyposts:storyposts });
     }));
 
 
@@ -87,7 +89,7 @@ router.post("/mainupload", checkLogin, upload.single('img'), asyncHandler(async 
 
     router.get("/upload", checkLogin, asyncHandler(async(req, res) => {
         const userId = req.user.id; // 로그인한 사용자의 ID를 받아옴
-        console.log("userId:", userId);
+        console.log("로그인 한 아이디:", userId);
         res.render("upload", { userId: userId });
     }));
     

@@ -40,45 +40,45 @@
   
   .main-content {
     display: flex;
+    flex-direction: column; 
     justify-content: center; 
     align-items: center; 
-    flex-direction: row; 
     margin-left: 250px; 
     margin-right: 150px; 
-  }
-  
-  
-  .story-container {
+}
+
+.story-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* 가로 방향으로 정렬 */
     align-items: center;
     padding: 20px;
-    margin-right: 20px;
-  }
-  
-  .story {
+    
+}
+
+.story {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 5px;
-    margin-right: 20px;
-  }
+    margin-right: 40px;
   
-  .story img {
+}
+
+.story img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-  }
-  
-  .feed {
+}
+
+.feed {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     justify-content: center; 
     align-items: center; 
     padding: 20px; 
-    margin-left: 250px; 
-    margin-right: 250px; 
-  }
+    margin-right: 20px; 
+}
+
   
   .post::after {
     content: '';
@@ -117,14 +117,14 @@
   
   
   /* 미디어 쿼리(Media Queries) */
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 550px) {
     .sidebar1, .sidebar2 {
-      width: 100%; 
-      float: none; 
+      display: none; 
     }
+
     @media screen and (max-width: 768px) {
     .story:nth-child(n+3),.sideprofile img,
-    .sideprofile .username {
+    .sideprofile .username .sidebar1, .sidebar2 {
       display: none; 
     }
   }
