@@ -9,7 +9,7 @@
   
   <div class="card">
     <div class="card-body">
-        <% storyposts.forEach((storypost)=> { %>
+        <% storyposts.forEach((storypost ,index)=> { %>
             <h5 class="card-title" style="display: flex; align-items: center; margin-right: auto;">
                 <img src="/images/profile.jpg" style="height: 25px; width: 25px; margin-right:10px;">
                 <p style="margin: 0;"><%= storypost.userId %></p>
@@ -19,8 +19,8 @@
       
     
       <h6 class="card-subtitle mb-2 text-muted">
-                <% if (files) { %>
-                  <img src="/storys/<%= files %>" style="height: 460px; width: 380px; margin-right:10px;"><br>
+                <% if (files2[index]) { %>
+                  <img src="/storys/<%= files2[index] %>" style="height: 460px; width: 380px; margin-right:10px;"><br>
               <% } %>
                 <!--하트는 클릭하면 변하게 나중에 수정필요-->
                 <img src="/images/heart.png" style="width:25px; height: 25px;">

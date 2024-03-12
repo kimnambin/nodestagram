@@ -53,7 +53,7 @@ router.route("/mainupload")
         
         const user = await User.findOne({id: userId}); 
         
-        // 모든 포스트 가져오기f
+        // 모든 포스트 가져오기
         const posts = await Post.find().sort({ createdAt: -1 });
         // 모든 스토리 가져오기
         const storyposts = await Storypost.find().sort({ createdAt: -1 });

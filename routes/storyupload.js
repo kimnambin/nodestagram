@@ -8,14 +8,10 @@ const { checkLogin } = require("../controllers/user");
 const path = require('path');
 const fs = require("fs");
 
+
 // multer 설정
 const storage2 = multer.diskStorage({
     destination: function (req, file, cb) {
-        // 저장할 디렉토리가 존재하지 않으면 생성
-        const uploadsDir = path.join(__dirname, "../storys");
-        if (!fs.existsSync(uploadsDir)) {
-            fs.mkdirSync(uploadsDir);
-        }
         cb(null, uploadsDir);
     },
     filename: function (req, file, cb) {
@@ -37,14 +33,14 @@ const upload2 = multer({
         fileSize: 50 * 1024 * 1024
     }
 });
+const uploadsDir = path.join(__dirname, "../storys");
 
-// 파일 이름 정렬 함수 수정
+// 파일 이름 
 function generateFileName() {
-    const uploadsDir = path.join(__dirname, "../storys");
     // 이미지 파일 이름을 가져옴
-    const files = fs.readdirSync(uploadsDir);
+    const files2 = fs.readdirSync(uploadsDir);
     // 파일 이름을 역순으로 정렬하여 첫 번째 파일의 이름을 반환
-    return files.sort((a, b) => b.localeCompare(a))[0];
+    return files2.sort((a, b) => b.localeCompare(a));
 }
 
 
@@ -74,8 +70,7 @@ router.get("/storydetail", checkLogin, asyncHandler(async(req, res) => {
     const storyposts = await Storypost.find().sort({ createdAt: -1 });
 
     const files = generateFileName();
-
-    res.render("storydetail", { user: user, userId: userId , storyposts:storyposts , files: files});
+    res.render("storydetail", { user: user, userId: userId , storyposts:storyposts , files2: files});
 }));
 
 module.exports = router;
