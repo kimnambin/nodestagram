@@ -15,9 +15,11 @@ const storage2 = multer.diskStorage({
         cb(null, uploadsDir);
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
+        
+        cb(null, Date.now() + '-' + file.originalname); 
     }
 });
+
 
 // multer 설정 수정
 const upload2 = multer({ 
@@ -35,12 +37,12 @@ const upload2 = multer({
 });
 const uploadsDir = path.join(__dirname, "../storys");
 
-// 파일 이름 
+
+// 파일 이름 가져오기
 function generateFileName() {
-    // 이미지 파일 이름을 가져옴
+    // 이미지 파일 이름들을 가져옴
     const files2 = fs.readdirSync(uploadsDir);
-    // 파일 이름을 역순으로 정렬하여 첫 번째 파일의 이름을 반환
-    return files2.sort((a, b) => b.localeCompare(a));
+    return files2;
 }
 
 
@@ -64,13 +66,30 @@ router.post("/storyupload", checkLogin, upload2.single('img'), asyncHandler(asyn
     res.redirect(`/mainupload?id=${req.user.id}`);
 }));
 
-router.get("/storydetail", checkLogin, asyncHandler(async(req, res) => {
-    const userId = req.user.id; // 로그인한 사용자의 ID를 받아옴
-    const user = await User.findOne({id: userId}); 
-    const storyposts = await Storypost.find().sort({ createdAt: -1 });
+// router.get("/storydetail", 
+// checkLogin, asyncHandler(async(req, res) => {
+//     const userId = req.user.id; // 로그인한 사용자의 ID를 받아옴
+//     const user = await User.findOne({id: userId}); 
+//     const storyposts = await Storypost.find().sort({ createdAt: -1 });
+
+//     const files = generateFileName();
+//     res.render("storydetail", { user: user, userId: userId , storyposts:storyposts , files2: files});
+// }));
+
+router.get("/storydetail/:id", 
+checkLogin, asyncHandler(async(req, res) => {
+    const userId = req.params.userId; // 요청 URL에서 userId를 가져옴
+    const user = await User.findOne({ id: userId }); 
+    const storyposts = await Storypost.find({ _id: req.params.id}); 
+
+
 
     const files = generateFileName();
-    res.render("storydetail", { user: user, userId: userId , storyposts:storyposts , files2: files});
+    res.render("storydetail", { user: user, userId: userId, storyposts: storyposts, files2: files });
 }));
+
+
+
+
 
 module.exports = router;

@@ -51,7 +51,9 @@ router.route("/mainupload")
     .get(checkLogin, asyncHandler(async (req, res) => {
         const userId = req.user.id; // 사용자 아이디
         
-        const user = await User.findOne({id: userId}); 
+        const user = await User.findOne({id: userId}); // 이건 현재 로그인한 아이디
+        const users = await User.find({ id: { $ne: userId }});
+
         
         // 모든 포스트 가져오기
         const posts = await Post.find().sort({ createdAt: -1 });
@@ -63,7 +65,7 @@ router.route("/mainupload")
         const sortedFiles = getSortedFiles();
         console.log("user 모델 전달확인:", req.user);
         console.log("post 모델 전달확인:", req.post);
-        res.render("mainupload", { user: user, userId: userId, files: sortedFiles, body: body ,posts: posts, storyposts:storyposts });
+        res.render("mainupload", { user: user, users: users , userId: userId, files: sortedFiles, body: body ,posts: posts, storyposts:storyposts });
     }));
 
 

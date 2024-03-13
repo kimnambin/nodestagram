@@ -3,30 +3,39 @@
 
   <!--오른쪽 사이드바-->
       <div class="sidebar2">
-        <div class="sideprofile">
-          
-            <img src="/images/profile.jpg"style="height: 40px; width: 40px; margin-right:10px;"><span class="username"><%= userId %></span> 
+        <div class="sideprofile" style="margin-bottom: 20px;">
+          <img src="/images/profile.jpg"style="height: 40px; width: 40px; margin-right:10px;"><span class="username"><%= userId %></span> 
             <a href="/" style="margin-left: 10px; font-size: 0.8rem; text-decoration: none; font-weight: bold;">로그아웃</a>
         </div>
+
+        회원님을 위한 추천
+
+        <div class="alluser" style="margin-top:20px;">
+          <% users.forEach((user) => { %>
+            <div class="user" style="display: flex; align-items: center;">
+              <img src="/images/profile.jpg" style="height: 40px; width: 40px; margin-right: 10px; margin-bottom: 20px;">
+              <span class="username" style="margin-bottom: 20px;"><%= user.id %></span>
+            </div>
+          <% }) %>
+        </div>
+        
       </div>
       
    
 
   <!-- 메인 콘텐츠 부분 -->
   <div class="main-content">
-
-    
-
     <!-- 스토리 컨테이너 -->
   <div class="story-container">
-      <% storyposts.forEach((storypost)=> { %>
+      <% storyposts.forEach((storypost=> { %>
       <div class="story">
-        <a href = "storydetail">
+        <!-- <a href = "storydetail"> -->
+          <a href = "/storydetail/<%= storypost._id %>">
         <img src="/images/profile.jpg">
       </a>
         <span class="username"><%= storypost.userId %></span>
       </div>
-      <% }) %>
+      <% })) %>
   </div>
 
 

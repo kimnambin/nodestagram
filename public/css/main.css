@@ -103,12 +103,15 @@
     min-height: 100vh;
     padding: 20px;
     float: right;
+    flex-direction: column; 
   }
   
-  .sideprofile {
+  .sideprofile
+   {
     display: flex; 
     align-items: center; 
   }
+
   
   .sideprofile img,
   .sideprofile .username {

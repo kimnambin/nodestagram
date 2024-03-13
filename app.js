@@ -25,10 +25,10 @@ app.use(cookieParser());
 
 
 //라우터 부분
-app.use("/", require("./routes/login_sign"));
-app.use("/", require("./routes/mainupload"));
-app.use("/", require("./routes/storyupload"));
-app.use("/", require("./routes/dm"));
+app.use("/", require("./routes/R_login_sign"));
+app.use("/", require("./routes/R_mainupload"));
+app.use("/", require("./routes/R_storyupload"));
+app.use("/", require("./routes/R_dm"));
 
 // 서버 실행
 app.listen(3000, () => {
