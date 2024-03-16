@@ -30,7 +30,7 @@
       <% storyposts.forEach((storypost=> { %>
       <div class="story">
         <!-- <a href = "storydetail"> -->
-          <a href = "/storydetail/<%= storypost._id %>">
+          <a href = "/storydetail/<%= storypost.userId %>">
         <img src="/images/profile.jpg">
       </a>
         <span class="username"><%= storypost.userId %></span>

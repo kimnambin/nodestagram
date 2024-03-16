@@ -15,8 +15,8 @@ const storage2 = multer.diskStorage({
         cb(null, uploadsDir);
     },
     filename: function (req, file, cb) {
-        
-        cb(null, Date.now() + '-' + file.originalname); 
+        const userId = req.user.id;
+        cb(null, userId + '-'  + Date.now() + '-' + file.originalname); 
     }
 });
 
@@ -42,7 +42,7 @@ const uploadsDir = path.join(__dirname, "../storys");
 function generateFileName() {
     // 이미지 파일 이름들을 가져옴
     const files2 = fs.readdirSync(uploadsDir);
-    return files2;
+    return files2.sort((a, b) => b.localeCompare(a));
 }
 
 
@@ -76,18 +76,17 @@ router.post("/storyupload", checkLogin, upload2.single('img'), asyncHandler(asyn
 //     res.render("storydetail", { user: user, userId: userId , storyposts:storyposts , files2: files});
 // }));
 
-router.get("/storydetail/:id", 
+router.get("/storydetail/:userId", 
 checkLogin, asyncHandler(async(req, res) => {
-    const userId = req.params.userId; // 요청 URL에서 userId를 가져옴
+    const userId = req.params.userId; 
     const user = await User.findOne({ id: userId }); 
-    const storyposts = await Storypost.find({ _id: req.params.id}); 
-
-
-
+    const storyposts = await Storypost.find({userId: req.params.userId});
+    
     const files = generateFileName();
+   
     res.render("storydetail", { user: user, userId: userId, storyposts: storyposts, files2: files });
-}));
 
+}));
 
 
 

@@ -32,5 +32,5 @@ app.use("/", require("./routes/R_dm"));
 
 // 서버 실행
 app.listen(3000, () => {
-    console.log('서버 실행 중');
+    console.log('http://localhost:3000/');
 });

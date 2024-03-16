@@ -2,23 +2,23 @@
 const leftbtn = document.querySelector('.left-btn');
 const rightbtn = document.querySelector('.right-btn');
 
-const carousel = document.querySelector('.carousel');
+const container2 = document.getElementById('.card-body2');
+const leftbtn2 = document.getElementById('.left-btn2');
+const rightbtn2 = document.getElementById('.right-btn2');
 
-// 0부터 시작하며, 시작 시 첫 번째 슬라이드만 보이도록 설정
-let index = 0;
-showSlide(index);
+document.getElementById('image_<%= storypost.userId %>').style.visibility = "hidden";
+document.getElementById('.left-btn2').style.display = 'none';
+document.getElementById('.right-btn2').style.display = 'none';
+
+setTimeout(function() {
+    window.location.href = "/mainupload"; // 이동 주소
+}, 3000);
 
 leftbtn.addEventListener('click', () => {
-    index = (index - 1 + 4) % 4; // 왼쪽으로 이동
-    showSlide(index);
+    card-body;
 });
 
 rightbtn.addEventListener('click', () => {
-    index = (index + 1) % 4; // 오른쪽으로 이동
-    showSlide(index);
+    card-body;
 });
 
-function showSlide(index) {
-    const slideWidth = document.querySelector('.slide').offsetWidth;
-    carousel.style.transform = `translate3d(-${slideWidth * index}px, 0, 0)`;
-}

@@ -4,31 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src = "/js/storydetail"></script>
+  <script src = "/js/storydetail.js"></script>
+  <script src = "/path/to/cdn/jquery.min.js"></script>
+  <script src = "/path/to/js/script.js"></script>
   
+ 
+                      
 
 </head>
 <body>
   
   <div class="card">
     <!--카드 컨테이너의 상단부분-->
+   
     <div class="card-body">
-        <% storyposts.forEach((storypost, index) => { %>
+        <% storyposts.forEach((storypost) => { %>
             <div class="story-card">
-                <h5 class="card-title" style="display: flex; align-items: center; margin-right: auto;">
-                    <img src="/images/profile.jpg" style="height: 25px; width: 25px; margin-right:10px;">
-                    <p style="margin: 0;"><%= storypost.userId %></p>
-                    <a href="/mainupload" style="text-decoration: none; color: black; font-size: 30px;  margin-left: 320px;"> x </a>
-                </h5>
+              <section class="loading" style="margin-left: auto;">
+                <div class="progress-bar" aria-hidden="true">
+                    <span class="progress-bar-gauge"></span>
+                </div>
+            </section>
+            <h5 class="card-title" style="display: flex; align-items: center; margin-right: auto;">
+              <img src="/images/profile.jpg" style="height: 25px; width: 25px; margin-right:10px;">
+              <p style="margin: 0;"><%= storypost.userId %></p>
+              <a href="/mainupload" style="text-decoration: none; color: black; font-size: 30px;  margin-left: 320px;"> x </a>
+          </h5>
                 <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 5px 0;">
         
                 <!--카드 컨테이너의 메인부분-->
                 <h6 class="card-subtitle mb-2 text-muted">
                     <div class="image-container" style="position: relative;">
                         <button class="left-btn" type="button"><span class="material-icons">chevron_left</span></button>
-                        <% if (files2[index]) { %> <!-- 해당 인덱스에 대한 파일이 존재하는 경우에만 실행 -->
-                            <img src="/storys/<%= files2[index] %>" style="height: 460px; width: 380px; margin-right:10px;"><br>
-                        <% } %>
+                        <% const matchingFiles = files2.filter(file => file.startsWith(storypost.userId + '-')); %>
+                    <% if (matchingFiles.length > 0) { %>
+                        <img src="/storys/<%= matchingFiles[0] %>" style="height: 460px; width: 380px; margin-right:10px;"><br>
+                    <% } %>
                         <button class="right-btn" type="button"><span class="material-icons">chevron_right</span></button>
                     </div>
 
@@ -40,7 +51,12 @@
         <% }) %>
     </div>
 </div>
+<script>
+  setTimeout(function() {
+    window.location.href = "/mainupload"; 
+}, 10000);
 
+</script>
 
   
     <style>
@@ -64,14 +80,14 @@
     width: 500px; 
   }
 
-  .card-body{
+  .card-body, .card-body2{
     display: flex; 
     flex-direction: column; 
     justify-content: center; 
     align-items: center;
   }
 
-  .left-btn, .right-btn {
+  .left-btn, .right-btn, .left-btn2 , .right-btn2 {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -89,7 +105,74 @@
         right: -40px;
       }
 
- 
+      .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto; /* 변경된 부분 */
+    height: 25px; /* 이미지와 텍스트와 동일한 높이로 설정 */
+    margin-right: 10px; /* 이미지와 텍스트 사이 간격 */
+}
+
+.progress-bar {
+    width: 350px;
+    height: 12px;
+    background-color: #e5eaef;
+    border-radius: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar-gauge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 12px;
+    border-radius: 100px;
+    background-color: #13CE66;
+    animation-name: loading-bar;
+    animation-duration: 10000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+}
+
+@keyframes loading-bar {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+@keyframes flicker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes loading-bar {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  90% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
+
+
+
+
 
     </style>
     
