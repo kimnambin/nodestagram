@@ -3,11 +3,15 @@
 
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
+const Post = require("../models/post");
+const Storypost = require("../models/storypost");
 const bcrypt = require("bcrypt");
 //환경 변수 가져오기
 require("dotenv").config();
 const jwtSecret = process.env.JWT_SECRET;
 const jwt = require("jsonwebtoken");
+const { getSortedFiles } = require("../controllers/uploadfile");
+
 
 // "/"일 때 로그인 화면 보여주깅
 const getLogin = (req,res) => {
@@ -17,7 +21,7 @@ const getLogin = (req,res) => {
 //로그인 하기 -> post
 const loginUser = asyncHandler(async (req, res) => {
     const { id, pw } = req.body;
-
+    
 
     // 입력된 값이 전화번호인지, 사용자명인지, 이메일인지 확인
     const user = await User.findOne({
@@ -46,10 +50,15 @@ const loginUser = asyncHandler(async (req, res) => {
     res.cookie("token", token, { httpOnly: true });
 
     
-    
+    const sortedFiles = getSortedFiles();
+
      //로그인 후 사용자 아이디를 표시
-     res.render("main", { 
-        userId: user.id, 
+     res.render("mainpage", { 
+        userId: user.id, files: sortedFiles,user,
+        //로그인 후 사용자 정보 및 게시글을 보기 위한 것들
+        users: await User.find({ id: { $ne: user.id }}),
+        posts: await Post.find().sort({ createdAt: -1 }),
+        storyposts : await Storypost.find().sort({ createdAt: -1 })
     });
     
 });
@@ -97,7 +106,7 @@ const checkLogin = (req, res, next) => {
       } catch (error) {
       
         
-        res.redirect("/main");
+        res.redirect("/mainpage");
       }
     }
   };

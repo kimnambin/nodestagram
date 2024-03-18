@@ -6,48 +6,12 @@ const Post = require("../models/post");
 const User = require("../models/user");
 const Storypost = require("../models/storypost");
 const asyncHandler = require("express-async-handler");
-const multer = require("multer");
 const { checkLogin } = require("../controllers/user");
-const path = require('path');
-const fs = require("fs");
-
-// 이미지 업로드를 위한 multer 설정
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // 이미지가 저장될 경로 설정
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname); // 이미지 파일의 이름 설정
-    }
-});
-
-const upload = multer({ 
-    storage: storage,
-    fileFilter: function (req, file, cb) {
-        var ext = path.extname(file.originalname);
-        if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
-            return cb(new Error('다른 파일로 업로드 하세요.'));
-        }
-        cb(null, true);
-    },
-    limits: {
-        fileSize: 50 * 1024 * 1024
-    }
-});
-
-// 이미지 파일 경로
-const uploadsDir = path.join(__dirname, "../uploads");
-
-// 파일 이름 정렬
-function getSortedFiles() {
-    // 이미지 파일 이름을 가져옴
-    const files = fs.readdirSync(uploadsDir);
-    // 파일 이름을 역순으로 정렬하여 반환
-    return files.sort((a, b) => b.localeCompare(a));
-}
+const { upload, getSortedFiles } = require("../controllers/uploadfile");
 
 
-router.route("/mainupload")
+
+router.route("/mainpage")
     .get(checkLogin, asyncHandler(async (req, res) => {
         const userId = req.user.id; // 사용자 아이디
         
@@ -65,14 +29,12 @@ router.route("/mainupload")
         const sortedFiles = getSortedFiles();
         console.log("user 모델 전달확인:", req.user);
         console.log("post 모델 전달확인:", req.post);
-        res.render("mainupload", { user: user, users: users , userId: userId, files: sortedFiles, body: body ,posts: posts, storyposts:storyposts });
+        res.render("mainpage", { user, users , userId, files: sortedFiles, body, posts, storyposts });
     }));
 
 
 
-
-    
-router.post("/mainupload", checkLogin, upload.single('img'), asyncHandler(async (req, res) => {
+router.post("/mainpage", checkLogin, upload.single('img'), asyncHandler(async (req, res) => {
         const { body } = req.body;
         const imgPath = req.file.path;
         const userId = req.user.id; // 현재 로그인한 사용자의 아이디
@@ -84,7 +46,7 @@ router.post("/mainupload", checkLogin, upload.single('img'), asyncHandler(async 
             userId: userId, // 현재 로그인한 사용자의 아이디 저장
         });
         
-        res.redirect(`/mainupload?id=${req.user.id}`);
+        res.redirect(`/mainpage?id=${req.user.id}`);
     }));
     
 

@@ -18,7 +18,18 @@
     <!--카드 컨테이너의 상단부분-->
    
     <div class="card-body">
-        <% storyposts.forEach((storypost) => { %>
+
+      <!--스토리 디테일마다 이미지를 1개만 보여주기 위함-->
+      <% 
+    const displayedUserIds = []; 
+    storyposts.forEach((storypost) => { 
+       
+        if (displayedUserIds.includes(storypost.userId)) {
+            return;
+        }
+        displayedUserIds.push(storypost.userId); 
+%>
+       
             <div class="story-card">
               <section class="loading" style="margin-left: auto;">
                 <div class="progress-bar" aria-hidden="true">
@@ -28,19 +39,19 @@
             <h5 class="card-title" style="display: flex; align-items: center; margin-right: auto;">
               <img src="/images/profile.jpg" style="height: 25px; width: 25px; margin-right:10px;">
               <p style="margin: 0;"><%= storypost.userId %></p>
-              <a href="/mainupload" style="text-decoration: none; color: black; font-size: 30px;  margin-left: 320px;"> x </a>
+              <a href="/mainpage" style="text-decoration: none; color: black; font-size: 30px;  margin-left: 320px;"> x </a>
           </h5>
                 <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 5px 0;">
         
                 <!--카드 컨테이너의 메인부분-->
                 <h6 class="card-subtitle mb-2 text-muted">
                     <div class="image-container" style="position: relative;">
-                        <button class="left-btn" type="button"><span class="material-icons">chevron_left</span></button>
-                        <% const matchingFiles = files2.filter(file => file.startsWith(storypost.userId + '-')); %>
-                    <% if (matchingFiles.length > 0) { %>
-                        <img src="/storys/<%= matchingFiles[0] %>" style="height: 460px; width: 380px; margin-right:10px;"><br>
-                    <% } %>
-                        <button class="right-btn" type="button"><span class="material-icons">chevron_right</span></button>
+                        <button class="left-btn" type="button" onclick="showPreviousStory()"><span class="material-icons">chevron_left</span></button>
+        <% const matchingFile = files2.find(file => file.startsWith(storypost.userId + '-')); %>
+            <% if (matchingFile) { %>
+            <img src="/storys/<%= matchingFile %>" style="height: 460px; width: 380px; margin-right:10px;"><br>
+        <% } %>
+                        <button class="right-btn" type="button" onclick="showNextStory()"><span class="material-icons">chevron_right</span></button>
                     </div>
 
                    
@@ -53,8 +64,9 @@
 </div>
 <script>
   setTimeout(function() {
-    window.location.href = "/mainupload"; 
+    window.location.href = "/mainpage"; 
 }, 10000);
+
 
 </script>
 

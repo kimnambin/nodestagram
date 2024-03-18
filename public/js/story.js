@@ -23,7 +23,7 @@ function storyImage(input) {
 
             // "공유하기" 버튼 클릭 이벤트 처리
             btn.addEventListener("click", function() {
-                window.location.href = '/mainupload';
+                window.location.href = '/mainpage';
                 // FormData 객체 생성
                 const formData = new FormData();
                 formData.append('img', file); // 이미지 파일 추가

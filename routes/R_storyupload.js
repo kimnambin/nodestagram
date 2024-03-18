@@ -3,47 +3,11 @@ const router = express.Router();
 const Storypost = require("../models/storypost");
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
-const multer = require("multer");
 const { checkLogin } = require("../controllers/user");
-const path = require('path');
-const fs = require("fs");
+const { upload2, generateFileName } = require("../controllers/storyfile");
 
 
-// multer 설정
-const storage2 = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, uploadsDir);
-    },
-    filename: function (req, file, cb) {
-        const userId = req.user.id;
-        cb(null, userId + '-'  + Date.now() + '-' + file.originalname); 
-    }
-});
 
-
-// multer 설정 수정
-const upload2 = multer({ 
-    storage: storage2,
-    fileFilter: function (req, file, cb) {
-        var ext = path.extname(file.originalname);
-        if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
-            return cb(new Error('다른 파일로 업로드 하세요.'));
-        }
-        cb(null, true);
-    },
-    limits: {
-        fileSize: 50 * 1024 * 1024
-    }
-});
-const uploadsDir = path.join(__dirname, "../storys");
-
-
-// 파일 이름 가져오기
-function generateFileName() {
-    // 이미지 파일 이름들을 가져옴
-    const files2 = fs.readdirSync(uploadsDir);
-    return files2.sort((a, b) => b.localeCompare(a));
-}
 
 
 
@@ -66,15 +30,6 @@ router.post("/storyupload", checkLogin, upload2.single('img'), asyncHandler(asyn
     res.redirect(`/mainupload?id=${req.user.id}`);
 }));
 
-// router.get("/storydetail", 
-// checkLogin, asyncHandler(async(req, res) => {
-//     const userId = req.user.id; // 로그인한 사용자의 ID를 받아옴
-//     const user = await User.findOne({id: userId}); 
-//     const storyposts = await Storypost.find().sort({ createdAt: -1 });
-
-//     const files = generateFileName();
-//     res.render("storydetail", { user: user, userId: userId , storyposts:storyposts , files2: files});
-// }));
 
 router.get("/storydetail/:userId", 
 checkLogin, asyncHandler(async(req, res) => {

@@ -25,14 +25,14 @@ function uploadImage(input) {
             btn.addEventListener("click", function() {
                 // 사용자가 입력한 데이터 수집
                 const body = document.getElementById("body").value;
-                window.location.href = '/mainupload';
+                window.location.href = '/mainpage';
                 // FormData 객체 생성
                 const formData = new FormData();
                 formData.append('body', body);
                 formData.append('img', file); // 이미지 파일 직접 추가
                 
                 // POST 요청 보내기
-                fetch("/mainupload", {
+                fetch("/mainpage", {
                     method: "POST",
                     body: formData, // FormData 객체 전송
                 })
