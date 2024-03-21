@@ -1,49 +1,52 @@
-//이미지 디테일 부분
-const leftbtn = document.querySelector('.left-btn');
-const rightbtn = document.querySelector('.right-btn');
-
-const container2 = document.getElementById('.card-body2');
-const leftbtn2 = document.getElementById('.left-btn2');
-const rightbtn2 = document.getElementById('.right-btn2');
-
-document.getElementById('image_<%= storypost.userId %>').style.visibility = "hidden";
-document.getElementById('.left-btn2').style.display = 'none';
-document.getElementById('.right-btn2').style.display = 'none';
-
 setTimeout(function() {
-    window.location.href = "/mainpage"; // 이동 주소
-}, 3000);
+    window.location.href = "/mainpage"; 
+}, 10000);
 
-leftbtn.addEventListener('click', () => {
-    card-body;
-});
 
-rightbtn.addEventListener('click', () => {
-    card-body;
-});
+// 현재 이미지의 인덱스
+let currentIndex = 0;
+// 모든 스토리 이미지 요소를 가져옴
+let storyImages = document.querySelectorAll('.story-image');
 
-// storydetail.js
-
-// 다음 스토리로 이동하는 함수
-// storydetail.js
-
-// 다음 스토리로 이동하는 함수
-function showNextImage(userId) {
-    // 서버로 다음 스토리의 userId를 요청
-    $.ajax({
-        url: '/nextStory', // 요청을 처리할 라우터 경로
-        method: 'POST',
-        data: { currentUserId: userId }, // 현재 스토리의 userId를 전달
-        success: function(response) {
-            // 서버에서 받은 응답을 기반으로 페이지 이동
-            if (response.nextUserId) {
-                window.location.href = '/storydetail/' + response.nextUserId;
-            } else {
-                console.log('다음 스토리가 없습니다.');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('서버 요청 중 에러 발생:', error);
-        }
-    });
+// 이미지 변경 함수
+function changeStoryImage(userId, index) {
+    const matchingFiles = files2.filter(file => file.startsWith(userId + '-'));
+    const image = document.getElementById('storyImage-' + index);
+    if (matchingFiles.length > 0) {
+        image.src = "/storys/" + matchingFiles[0];
+    }
 }
+
+// 좌측 버튼 클릭 이벤트 핸들러
+function leftbtn() {
+    if (currentIndex > 0) {
+        // 현재 이미지를 숨김
+        storyImages[currentIndex].style.display = 'none';
+        // 이전 이미지의 인덱스로 이동
+        currentIndex--;
+        // 이전 이미지를 보이게 함
+        storyImages[currentIndex].style.display = 'block';
+    }
+}
+
+// 우측 버튼 클릭 이벤트 핸들러
+function rightbtn() {
+    if (currentIndex < storyImages.length - 1) {
+        // 현재 이미지를 숨김
+        storyImages[currentIndex].style.display = 'none';
+        // 다음 이미지의 인덱스로 이동
+        currentIndex++;
+        // 다음 이미지를 보이게 함
+        storyImages[currentIndex].style.display = 'block';
+    }
+}
+
+// 클릭 이벤트 리스너 등록
+document.querySelectorAll('.left-btn').forEach((button) => {
+    button.addEventListener('click', leftbtn);
+    console.log("안녕하세용")
+});
+
+document.querySelectorAll('.right-btn').forEach((button) => {
+    button.addEventListener('click', rightbtn);
+});

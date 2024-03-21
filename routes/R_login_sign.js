@@ -7,10 +7,9 @@ router.route("/")
     .get(getLogin)
     .post(loginUser);
 
-    router.route("/sign")
+router.route("/sign")
     .get(getRegister)
     .post(registerUser);
     
-
 
 module.exports = router;

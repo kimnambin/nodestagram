@@ -18,7 +18,6 @@ router.route("/mainpage")
         const user = await User.findOne({id: userId}); // 이건 현재 로그인한 아이디
         const users = await User.find({ id: { $ne: userId }});
 
-        
         // 모든 포스트 가져오기
         const posts = await Post.find().sort({ createdAt: -1 });
         // 모든 스토리 가져오기

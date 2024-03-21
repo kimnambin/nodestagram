@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src = "/js/storydetail.js"></script>
-  <script src = "/path/to/cdn/jquery.min.js"></script>
-  <script src = "/path/to/js/script.js"></script>
   
  
                       
@@ -20,14 +18,14 @@
     <div class="card-body">
 
       <!--스토리 디테일마다 이미지를 1개만 보여주기 위함-->
-      <% 
-    const displayedUserIds = []; 
-    storyposts.forEach((storypost) => { 
+      <%
+    const userstory = []; 
+    storyposts.forEach((storypost , index) => { 
        
-        if (displayedUserIds.includes(storypost.userId)) {
+        if (userstory.includes(storypost.userId)) {
             return;
         }
-        displayedUserIds.push(storypost.userId); 
+        userstory.push(storypost.userId); 
 %>
        
             <div class="story-card">
@@ -45,15 +43,16 @@
         
                 <!--카드 컨테이너의 메인부분-->
                 <h6 class="card-subtitle mb-2 text-muted">
-                    <div class="image-container" style="position: relative;">
-                        <button class="left-btn" type="button" onclick="showPreviousStory()"><span class="material-icons">chevron_left</span></button>
-        <% const matchingFile = files2.find(file => file.startsWith(storypost.userId + '-')); %>
-            <% if (matchingFile) { %>
-            <img src="/storys/<%= matchingFile %>" style="height: 460px; width: 380px; margin-right:10px;"><br>
-        <% } %>
-                        <button class="right-btn" type="button" onclick="showNextStory()"><span class="material-icons">chevron_right</span></button>
-                    </div>
-
+                  <!-- 여기가 이미지 부분-->
+                  <div class="image-container" style="position: relative;">
+                    <button class="left-btn" type="button" onclick="leftbtn()"><span class="material-icons">chevron_left</span></button>
+                    <button class="right-btn" type="button" onclick="rightbtn()"><span class="material-icons">chevron_right</span></button>
+                    <% userstory.forEach(userId => {
+                        const matchingFiles = files2.filter(file => file.startsWith(userId + '-'));
+                        matchingFiles.forEach(matchingFile => { %>
+                            <img id="storyImage-<%= index %>" src="/storys/<%= matchingFile%>" class ="story-image"><br>
+                    <% }) }); %>
+                </div>
                    
                     <!--하트는 클릭하면 변하게 나중에 수정필요-->
                     <img src="/images/heart.png" style="width:25px; height: 25px;">
@@ -62,13 +61,7 @@
         <% }) %>
     </div>
 </div>
-<script>
-  setTimeout(function() {
-    window.location.href = "/mainpage"; 
-}, 10000);
 
-
-</script>
 
   
     <style>
@@ -99,9 +92,18 @@
     align-items: center;
   }
 
-  .left-btn, .right-btn, .left-btn2 , .right-btn2 {
+  .story-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 460px; 
+    width: 380px; 
+    margin-right:10px; 
+}
+
+  .left-btn, .right-btn {
         position: absolute;
-        top: 50%;
+        top: 230px;
         transform: translateY(-50%);
         border: none;
         cursor: pointer;

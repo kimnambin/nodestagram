@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  
+ 
+                      
+
+</head>
+<body>
+  
+  <div class="card">
+   
+    <div class="card-body">
+        <h5 class="card-title" style="display: flex; align-items: center; margin-right: 0;">
+            <img src="/images/profile.jpg" style="height: 100px; width: 100px; margin-right:10px;">
+            <div class= "profileTitle" style ="display: flex; flex-direction: row; margin-left: 15px;">
+            <p style="margin-right: 15px;">게시글</p>
+            <p style="margin-right: 15px;">팔로워</p>
+            <p style="margin-right: 15px;">팔로잉</p>
+              </div> 
+            </h5>
+            <div class="profilebottom" style="display: flex; flex-direction: row; margin-left: 0;">
+                <p style="margin-right: 15px;">이름</p>
+                <p style="margin-left: 0;">아이디</p>
+            </div>
+
+            <!-- 현재는 모든 스토리가 다 보이지만 현재 아이디만 보이도록 수정 예정 s-->
+            <div class="story-container" style="display: flex; flex-direction: row; margin-left: 0;">
+                <% storyposts.forEach((storypost=> { %>
+                <div class="story">
+                  <!-- <a href = "storydetail"> -->
+                    <a href = "/storydetail/<%= storypost.userId %>">
+                  <img src="/images/profile.jpg" style=" border: solid 0.1rem grey;
+                  border-radius: 50%; width: 80px; height: 80px; border-radius: 50% ";>
+                </a>
+                  <span class="username"><%= storypost.userId %></span>
+                </div>
+                <% })) %>
+            </div>
+          
+      <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 5px 0;">
+    
+
+      
+
+        <% posts.forEach((post, index)=> { %>
+            <div class="story-card" style="display: flex; flex-direction: row; margin-left: 0;">
+                <% if (files[index]) { %>
+                  <img src="/uploads/<%= files[index] %>" style="height: 300px; width: 150x; margin-right:10px;"><br>
+              <% } %>
+            </div><hr>
+        <% }) %>
+
+               
+            </div>
+     
+    </div>
+</div>
+
+
+    <style>
+     
+
+  /* card 요소를 중앙에 배치 */
+  .card {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin-bottom: 0.4rem;
+    padding: 1.25rem 0;
+  }
+
+  .card-body, .card-body2{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .story-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 460px; 
+    width: 380px; 
+    margin-right:10px; 
+  }
+
+
+
+    </style>
+    
+</body>
+</html>

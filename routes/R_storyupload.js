@@ -7,10 +7,6 @@ const { checkLogin } = require("../controllers/user");
 const { upload2, generateFileName } = require("../controllers/storyfile");
 
 
-
-
-
-
 router.get("/storyupload", checkLogin, asyncHandler(async(req, res) => {
     const userId = req.user.id; // 로그인한 사용자의 ID를 받아옴
     console.log("로그인 한 아이디:", userId);
