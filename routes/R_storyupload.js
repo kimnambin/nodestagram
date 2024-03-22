@@ -35,7 +35,7 @@ checkLogin, asyncHandler(async(req, res) => {
     
     const files = generateFileName();
    
-    res.render("storydetail", { user: user, userId: userId, storyposts: storyposts, files2: files });
+    res.render("storydetail", { user, userId, storyposts, files2: files });
 
 }));
 

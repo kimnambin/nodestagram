@@ -21,11 +21,11 @@ router.get("/profile/:user_id", checkLogin, asyncHandler(async(req, res) => {
     const user_id = req.params.user_id;
     const user = await User.findOne({id: userId});
     const users = await User.find({ id: { $ne: userId }});
-    const posts = await Post.find().sort({ createdAt: -1 });
+    const posts = await Post.find();
+    //const posts = await Post.find({ userId: req.params.user_id });
     const storyposts = await Storypost.find({userId : req.params.user_id});
     const sortedFiles = getSortedFiles();
     res.render("profile", { userId , storyposts , user ,user_id, users, posts , files: sortedFiles});
-    console.log("user 모델 전달확인:", user.name);
 }));
 
 

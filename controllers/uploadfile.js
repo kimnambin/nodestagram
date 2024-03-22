@@ -39,8 +39,7 @@ function getSortedFiles() {
     // 이미지 파일 이름을 가져옴
     const files = fs.readdirSync(uploadsDir);
     // 파일 이름을 역순으로 정렬하여 반환
-    return files.sort((a, b) => b.localeCompare(b));
+    return files.sort((a, b) => b.localeCompare(a));
 }
-
 
 module.exports = { upload, getSortedFiles };
