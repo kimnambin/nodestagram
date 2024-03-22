@@ -37,16 +37,16 @@
           const dropdown = document.querySelector('#dropdown');
       
           uploadlink.addEventListener('click', function(event) {
-            event.preventDefault(); // 기본 이벤트 제거
+            event.preventDefault(); 
       
-            aprofile.style.display = "none";
+            profilepage.style.display = "none";
             dropdown.style.display = 'block';
           });
         });
       </script>
       
 
-        <li><a id = "aprofile" href="#" style="text-decoration: none; color: black;">프로필</a></li><br><br><br>
+        <li><a id ="profilepage" href="/profile/<%= userId %>" style="text-decoration: none; color: black;">프로필</a></li><br><br><br>
         <li><a href="#" style="text-decoration: none; color: black;">Threads</a></li><br>
         <li><a href="#" style="text-decoration: none; color: black;">더보기</a></li>
       </ul>

@@ -12,47 +12,49 @@
 <body>
   
   <div class="card">
-   
-    <div class="card-body">
+       <div class="card-body">
+        <a href ="/mainpage" style="text-decoration: none; color:black; font-size:25px; margin-left:440px;">x</a>
         <h5 class="card-title" style="display: flex; align-items: center; margin-right: 0;">
             <img src="/images/profile.jpg" style="height: 100px; width: 100px; margin-right:10px;">
-            <div class= "profileTitle" style ="display: flex; flex-direction: row; margin-left: 15px;">
-            <p style="margin-right: 15px;">게시글</p>
-            <p style="margin-right: 15px;">팔로워</p>
-            <p style="margin-right: 15px;">팔로잉</p>
+            <div class= "profileTitle" style ="display: flex; flex-direction: column; margin-left: 15px;">
+              <p style = "margin-right: 10px;"><%= user_id %></p>
+              <p style = "margin-right: 10px">🎉<%= user_id %>🎉님의 프로필입니다!! </p>
               </div> 
-            </h5>
-            <div class="profilebottom" style="display: flex; flex-direction: row; margin-left: 0;">
-                <p style="margin-right: 15px;">이름</p>
-                <p style="margin-left: 0;">아이디</p>
-            </div>
-
+              </h5>
+              <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 5px 0;">
+          
+            
+  
             <!-- 현재는 모든 스토리가 다 보이지만 현재 아이디만 보이도록 수정 예정 s-->
-            <div class="story-container" style="display: flex; flex-direction: row; margin-left: 0;">
+            <div class="story-container" style="display: flex; flex-direction: row; margin-right: auto; margin-left:30px; margin-bottom: 10px;">
                 <% storyposts.forEach((storypost=> { %>
                 <div class="story">
                   <!-- <a href = "storydetail"> -->
                     <a href = "/storydetail/<%= storypost.userId %>">
                   <img src="/images/profile.jpg" style=" border: solid 0.1rem grey;
-                  border-radius: 50%; width: 80px; height: 80px; border-radius: 50% ";>
+                  border-radius: 50%; width: 60px; height: 60px; border-radius: 50% ;">
                 </a>
-                  <span class="username"><%= storypost.userId %></span>
                 </div>
                 <% })) %>
+                <p style ='margin-left:10px;'>하이라이트</p>
             </div>
           
       <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 5px 0;">
     
 
       
-
+      <div class ="container" style="display:flex; flex-direction: row; justify-content: center; margin-top:20px">
         <% posts.forEach((post, index)=> { %>
-            <div class="story-card" style="display: flex; flex-direction: row; margin-left: 0;">
+           <div class ="posting-card" style="margin: 0 10px">
                 <% if (files[index]) { %>
-                  <img src="/uploads/<%= files[index] %>" style="height: 300px; width: 150x; margin-right:10px;"><br>
+                  <div class ="posting-img">
+                  <img src="/uploads/<%= files[index] %>" style="height: 300px; width: 150x; margin-right:10px;">
+                </div>
               <% } %>
             </div><hr>
         <% }) %>
+      </div>
+      
 
                
             </div>
@@ -75,11 +77,13 @@
     padding: 1.25rem 0;
   }
 
-  .card-body, .card-body2{
+  .card-body{
     display: flex; 
     flex-direction: column; 
     justify-content: center; 
     align-items: center;
+    border: solid 0.1rem #dbdbdb;
+    border-radius: 0.3rem;
   }
 
   .story-image {

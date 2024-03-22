@@ -4,7 +4,11 @@
   <!--오른쪽 사이드바-->
       <div class="sidebar2">
         <div class="sideprofile" style="margin-bottom: 20px;">
-          <img src="/images/profile.jpg"style="height: 40px; width: 40px; margin-right:10px;"><span class="username"><%= userId %></span> 
+         
+          <a href = "/profile/<%= userId %>">
+          <img src="/images/profile.jpg"style="height: 40px; width: 40px; margin-right:10px;">
+        </a>
+          <span class="username"><%= userId %></span></a> 
             <a href="/" style="margin-left: 10px; font-size: 0.8rem; text-decoration: none; font-weight: bold;">로그아웃</a>
         </div>
 
@@ -13,7 +17,9 @@
         <div class="alluser" style="margin-top:20px;">
           <% users.forEach((user) => { %>
             <div class="user" style="display: flex; align-items: center;">
+              <a href = "/profile/<%= user.id %>">
               <img src="/images/profile.jpg" style="height: 40px; width: 40px; margin-right: 10px; margin-bottom: 20px;">
+              </a>
               <span class="username" style="margin-bottom: 20px;"><%= user.id %></span>
             </div>
           <% }) %>
@@ -56,7 +62,7 @@
             <img src="/images/comment.png" style="width:25px; height: 25px;">
             <img src="/images/share.png" style="width:25px; height: 25px;"> <br>
             <p style="font-size: 12px;">좋아요 갯수</p>
-            <p class="postcontent"><span style="font-weight: bold;"><%= post.userId %></span> <%= post.body %></p>
+            <span style="font-weight: bold;"><%= post.userId %></span><p class="postcontent"> <%= post.body %></p>
         </div><hr>
     <% }) %>
     

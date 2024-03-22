@@ -6,8 +6,9 @@ const Post = require("../models/post");
 const User = require("../models/user"); 
 const Storypost = require("../models/storypost");
 const asyncHandler = require("express-async-handler");
-const { checkLogin } = require("../controllers/user");
-const { upload, getSortedFiles } = require("../controllers/uploadfile");
+const {checkLogin} = require("../controllers/user");
+const {getSortedFiles} = require("../controllers/uploadfile");
+
 
 router.get("/dm", checkLogin, asyncHandler(async(req, res) => {
     const userId = req.user.id; // 로그인한 사용자의 ID를 받아옴
@@ -15,14 +16,18 @@ router.get("/dm", checkLogin, asyncHandler(async(req, res) => {
     res.render("dm", { userId: userId });
 }));
 
-router.get("/profile", checkLogin, asyncHandler(async(req, res) => {
+router.get("/profile/:user_id", checkLogin, asyncHandler(async(req, res) => {
     const userId = req.user.id; // 로그인한 사용자의 ID를 받아옴
+    const user_id = req.params.user_id;
     const user = await User.findOne({id: userId});
+    const users = await User.find({ id: { $ne: userId }});
     const posts = await Post.find().sort({ createdAt: -1 });
-    const storyposts = await Storypost.find().sort({ createdAt: -1 });
+    const storyposts = await Storypost.find({userId : req.params.user_id});
     const sortedFiles = getSortedFiles();
-    res.render("profile", { userId , storyposts , user , posts ,  files: sortedFiles});
+    res.render("profile", { userId , storyposts , user ,user_id, users, posts , files: sortedFiles});
+    console.log("user 모델 전달확인:", user.name);
 }));
+
 
 
 module.exports = router;

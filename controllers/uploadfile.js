@@ -11,7 +11,9 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/'); // 이미지가 저장될 경로 설정
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname); // 이미지 파일의 이름 설정
+        const userId = req.user.id;
+        cb(null, userId + '-' + Date.now() + '-' + file.originalname); // 이미지 파일의 이름 설정
+        
     }
 });
 
@@ -37,7 +39,7 @@ function getSortedFiles() {
     // 이미지 파일 이름을 가져옴
     const files = fs.readdirSync(uploadsDir);
     // 파일 이름을 역순으로 정렬하여 반환
-    return files.sort((a, b) => b.localeCompare(a));
+    return files.sort((a, b) => b.localeCompare(b));
 }
 
 
