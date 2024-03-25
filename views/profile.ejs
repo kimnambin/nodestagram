@@ -7,22 +7,23 @@
 
 <body>
   
-  <div class="card">
+  <div id="modal" class="modal">
        <div class="card-body">
-        <a href ="/mainpage" style="text-decoration: none; color:black; font-size:30px; margin-left:440px;">x</a>
-        <h5 class="card-title" style="display: flex; align-items: center; margin-right: 0;">
+        <h5 class="card-title" style="display: flex; top: 0; position: absolute;">
             <img src="/images/profile.jpg" style="height: 100px; width: 100px; margin-right:10px;">
-            <div class= "profileTitle" style ="display: flex; flex-direction: column; margin-left: 15px;">
-              <p style = "margin-right: 10px;"><%= user_id %></p>
-              <p style = "margin-right: 10px">🎉<%= user_id %>🎉님의 프로필입니다!! </p>
-              </div> 
+            <div class="profileTitle" style="display: flex; flex-direction: column;">
+              <a href="/mainpage" style="text-decoration: none; color: black; font-size: 30px; margin-left: auto;">x</a>
+              <p style="margin: 0; margin-bottom: 10px;"><%= user_id %></p>
+              <p style="margin: 0;">🎉<%= user_id %>🎉님의 프로필입니다!!</p>
+          </div>
               </h5>
-              <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 5px 0;">
+              <hr style="width: 390px; height: 1px; background-color: #dbdbdb; border: none; top: 130px; position: absolute;">
+        
           
             
   
             <!-- 현재는 모든 스토리가 다 보이지만 현재 아이디만 보이도록 수정 예정 s-->
-            <div class="story-container" style="display: flex; flex-direction: row; margin-right: auto; margin-left:30px; margin-bottom: 10px;">
+            <div class="story-container" style="display: flex; flex-direction: row; margin-right: 160px;  margin-bottom: 10px; top: 150px; position: absolute;">
                 <% storyposts.forEach((storypost=> { %>
                 <div class="story">
                     <a href = "/storydetail/<%= storypost.userId %>">
@@ -34,30 +35,42 @@
                 <p style ='margin-left:10px;'>하이라이트</p>
             </div>
           
-      <hr style="width: 100%; height: 1px; background-color: #dbdbdb; border: none; margin: 5px 0;">
+      <hr style="width: 390px; height: 1px; background-color: #dbdbdb; border: none; top: 220px; position: absolute;">
     
-      <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
-        <% let count = 0; %>
-        <% posts.forEach((post) => { 
-             if (post.userId === user_id) { 
-                 const postId = post.userId; 
-                 const matchingFiles = files.filter(file => file.startsWith(postId + '-')); 
-                 matchingFiles.forEach(matchingFile => { %>
-                  <div class="posting-card" style="flex-basis: calc(33.33% - 10px); margin-bottom: 20px; padding: 0;">
-                    <div class="posting-img">
-                        <img src="/uploads/<%= matchingFile %>" style="height: 150px; width: 150px;">
-                    </div>
-                </div>
-                
-                    <% count++; 
-               })}}) %>
+
+      <div class="container" style="display: grid; grid-template-columns: repeat(2, 1fr); justify-content: center;  top: 240px; position: absolute;">
+        <% let count = 0;
+           let displayedImages = []; //이게 이미지의 중복을 막기 위함
+
+         for (let i = 0; i < posts.length; i++) { 
+            const post = posts[i];
+            if (post.userId === user_id) {  //먼저 유저랑 포스트랑 아이디가 동일한지 확인
+                const postId = post.userId; 
+                const matchingFiles = files.filter(file => file.startsWith(postId + '-')); 
+                const newmatchingFiles = [...new Set(matchingFiles)];
+
+                for (let j = 0; j < newmatchingFiles.length; j++) { //여기가 중복 확인
+                    const matchingFile = newmatchingFiles[j]; 
+                    if (!displayedImages.includes(matchingFile)) { 
+                        displayedImages.push(matchingFile); 
+        %>
+                        <div class="posting-card">
+                            <div class="posting-img">
+                                <img src="/uploads/<%= matchingFile%>" style="height: 180px; width: 180px; border: solid 0.1rem grey;
+                                border-radius: 0.3rem;">
+                            </div>
+                        </div>
+        <% count++;
+                    if (count >= 4) break; 
+                    }
+                }
+            }
+            if (count >= 4) break;
+        } %>
     </div>
     
     
-    
-      
-      
-
+  
     </div>   
   </div>
 </div>
@@ -67,15 +80,21 @@
      
 
   /* card 요소를 중앙에 배치 */
-  .card {
+  .modal {
     align-items: center;
     background-color: #ffffff;
-    display: flex;
+    display:flex;
     flex-direction: column;
-    flex-shrink: 0;
-    margin-bottom: 0.4rem;
-    padding: 1.25rem 0;
-  }
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    width: 390px;
+    height: 740px;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+
 
   .card-body{
     display: flex; 
@@ -84,6 +103,9 @@
     align-items: center;
     border: solid 0.1rem #dbdbdb;
     border-radius: 0.3rem;
+    width: 390px;
+    height: 740px;
+    overflow-y: auto;
   }
 
   .story-image {

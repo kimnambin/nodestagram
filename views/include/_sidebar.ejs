@@ -22,28 +22,14 @@
         <li><a href="#" style="text-decoration: none; color: black;">릴스</a></li><br>
         <li><a href="/dm" style="text-decoration: none; color: black;">메시지</a></li><br>
         <li><a href="#" style="text-decoration: none; color: black;">알림</a></li><br>
-        <!-- <li><a href="/upload" style="text-decoration: none; color: black;">만들기</a></li><br> -->
         <li><a id="uploadlink" href="#" style="text-decoration: none; color: black;">만들기</a></li><br>
-        <div id="dropdown" style="display: none;  border: solid 0.1rem #dbdbdb;
-        border-radius: 0.5rem; box-sizing: border-box; padding: 0 0.25rem; position: absolute;">
-          <div class="dropdown-item"><a href="/upload" style="text-decoration: none; color: black;">게시글</a></div>
+        <div id="dropdown" style="display: none;  border: solid 0.1rem grey; flex-direction:row;
+        border-radius: 0.5rem; box-sizing: border-box; width: 50%; position: absolute; text-align: center;">
+          <div class="dropdown-item"><a href="/upload" style="text-decoration: none; color: black; display: block; margin: 0 auto;">게시글</a></div><hr>
           <div class="dropdown-item"><a href="/storyupload" style="text-decoration: none; color: black;">스토리</a></div>
       </div>
 
-      <!--만들기 클릭 시 드롭다운 생성-->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const uploadlink = document.querySelector('#uploadlink');
-          const dropdown = document.querySelector('#dropdown');
       
-          uploadlink.addEventListener('click', function(event) {
-            event.preventDefault(); 
-      
-            profilepage.style.display = "none";
-            dropdown.style.display = 'block';
-          });
-        });
-      </script>
       
 
         <li><a id ="profilepage" href="/profile/<%= userId %>" style="text-decoration: none; color: black;">프로필</a></li><br><br><br>
@@ -52,3 +38,19 @@
       </ul>
     </div>
   </nav>
+
+  <!--만들기 클릭 시 드롭다운 생성-->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const uploadlink = document.querySelector('#uploadlink');
+      const dropdown = document.querySelector('#dropdown');
+      
+  
+      uploadlink.addEventListener('click', function(event) {
+        event.preventDefault(); 
+  
+        profilepage.style.display = "none";
+        dropdown.style.display = 'block';
+      });
+    });
+  </script>

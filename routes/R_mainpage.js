@@ -11,6 +11,7 @@ const { upload, getSortedFiles } = require("../controllers/uploadfile");
 
 
 
+
 router.route("/mainpage")
     .get(checkLogin, asyncHandler(async (req, res) => {
         const userId = req.user.id; // 사용자 아이디
@@ -27,7 +28,7 @@ router.route("/mainpage")
         const sortedFiles = getSortedFiles();
         console.log("user 모델 전달확인:", req.user);
         console.log("post 모델 전달확인:", req.post);
-        res.render("mainpage", { user_id, users , userId, files: sortedFiles, body, posts, storyposts });
+        res.render("mainpage",{ user_id, users , userId, files: sortedFiles, body, posts, storyposts});
     }));
 
 
