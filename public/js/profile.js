@@ -1,0 +1,75 @@
+
+
+// 모달창 오픈 부분
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.querySelector('.modal');
+    const modalopen = document.querySelector('#modalopen');
+    const modalclose = document.querySelector('.close');
+        
+        modalopen.addEventListener("click", function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+        });
+        
+        modalclose.addEventListener('click', function() {
+        modal.style.display = 'none';
+                });
+            });
+
+
+ 
+            function uploadImage(input) {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement("img");
+                        img.src = e.target.result;
+                        img.style.maxWidth = "120px";
+                        img.style.height = "120px";
+            
+                        const preview = document.getElementById("previewImage");
+                        preview.innerHTML = ""; // 기존에 업로드된 이미지 제거
+                        preview.appendChild(img);
+                        preview.style.display = "block"; // 미리보기 요소 표시
+            
+                        // card2 보이기
+                        const card1 = document.querySelector(".modal");
+                        const card2 = document.querySelector(".card2");
+                        const btn = document.getElementById("computerSelectBtn");
+                        btn.textContent = "공유하기";
+                        card1.style.display = "none";
+                        card2.style.display = "block";
+            
+                        // "공유하기" 버튼 클릭 이벤트 처리
+                        btn.addEventListener("click", function() {
+                            
+                            //window.location.href = '/mainpage';
+                            card2.style.display = 'none';
+                            // FormData 객체 생성
+                            const formData = new FormData();
+                            formData.append('img', file); // 이미지 파일 직접 추가
+                           
+                            // POST 요청 보내기
+                            fetch("/profile/:user_id", { // 올바른 URL로 수정
+                                method: "POST",
+                                body: formData // FormData 객체를 요청의 body에 포함
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error("Network response was not ok");
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log("Data received from server:", data);
+                                // 서버에서 받은 데이터에 따라 처리
+                            })
+                            .catch(error => {
+                                console.error("Error:", error);
+                            });
+                        });
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }

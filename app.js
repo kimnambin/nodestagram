@@ -18,6 +18,7 @@ db();
 app.use(express.static("./public"));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/storys', express.static(path.join(__dirname, 'storys')));
+app.use('/profileimg', express.static(path.join(__dirname, 'profileimg')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

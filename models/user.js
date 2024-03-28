@@ -21,7 +21,11 @@ const userSchema = new mongoose.Schema({
     pw: {
         type: String,
         required: true
-    }
+    },
+    img: {
+        data: Buffer,
+        contentType: String
+    },
 });
 
 module.exports = mongoose.model("User" , userSchema);
